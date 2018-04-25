@@ -1,0 +1,639 @@
+<sdf version='1.6'>
+	<model name='tsst'>
+		<self_collide>true</self_collide>
+
+		<link name='pedestal'>
+			<pose frame=''>0 0 0 0 -0 0</pose>
+			<inertial>
+				<pose frame=''>0 0 0 0 -0 0</pose>
+				<mass>2</mass>
+				<inertia>
+					<ixx>6.65125</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>6.65125</iyy>
+					<iyz>4.44089e-16</iyz>
+					<izz>2</izz>
+				</inertia>
+			</inertial>
+
+			<visual name='pedestal_pole_visual'>
+				<pose frame=''>0 0 2.9 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>5.8</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+
+			<visual name='pedestal_base_visual'>
+				<pose frame=''>0 0 0.05 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.1</length>
+						<radius>0.5</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+
+		<joint name='glue_pedestal_to_world' type='revolute'>
+			<child>pedestal</child>
+			<parent>world</parent>
+			<axis>
+				<limit>
+					<lower>0</lower>
+					<upper>0</upper>
+				</limit>
+				<dynamics>
+					<damping>0</damping>
+					<friction>0</friction>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+				</dynamics>
+				<use_parent_model_frame>1</use_parent_model_frame>
+				<xyz>0 0 1</xyz>
+			</axis>
+		</joint>
+
+		<link name='base_plate'>
+			<pose frame=''>0 0 5.85 0 -0 0</pose>
+			<visual name='base_plate_visual'>
+				<pose frame=''>0 0 0 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.1</length>
+						<radius>0.9</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name='base_plate_collision'>
+				<pose frame=''>0 0 0 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.1</length>
+						<radius>0.9</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name='glue_base_to_pedestal' type='revolute'>
+			<child>base_plate</child>
+			<parent>pedestal</parent>
+			<axis>
+				<limit>
+					<lower>0</lower>
+					<upper>0</upper>
+				</limit>
+				<dynamics>
+					<damping>0</damping>
+					<friction>0</friction>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+				</dynamics>
+				<use_parent_model_frame>1</use_parent_model_frame>
+				<xyz>0 0 1</xyz>
+			</axis>
+		</joint>
+
+		<link name='base_leg_1'>
+			<pose frame=''>1 0 6 0 -0 0</pose>
+			<visual name='base_leg_1_visual'>
+				<pose frame=''>0 0 0.5 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>1.0</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+				<material>
+					<ambient>0.5 0 0 1</ambient>
+					<diffuse>1.0 0 0 1</diffuse>
+					<specular>0.1 0.1 0.1 1</specular>
+					<emissive>0 0 0 0</emissive>
+				</material>
+			</visual>
+			<collision name='base_leg_1_collision'>
+				<pose frame=''>0 0 0.5 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>1.0</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+			<inertial>
+				<pose frame=''>0 0 0.5 0 -0 0</pose>
+				<mass>1</mass>
+				<inertia>
+					<ixx>0.1</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.1</iyy>
+					<iyz>0</iyz>
+					<izz>0.005</izz>
+				</inertia>
+			</inertial>
+			<visual name='base_leg_1_plate_revolute_visual'>
+				<pose frame=''>0 0 0 1.5707963267948966 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.2</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<visual name='base_leg_1_ball_visual'>
+				<pose frame=''>-0.1 0 1.1 0 -0 0</pose>
+				<geometry>
+					<sphere>
+						<radius>0.1</radius>
+					</sphere>
+				</geometry>
+			</visual>
+		</link>
+
+		<joint name='joint1' type='revolute'>
+			<child>base_leg_1</child>
+			<parent>base_plate</parent>
+			<axis>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>+3.1415926535897936</upper>
+				</limit>
+				<dynamics>
+					<damping>0</damping>
+					<friction>0</friction>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+				</dynamics>
+				<use_parent_model_frame>1</use_parent_model_frame>
+				<xyz>0 1 0</xyz>
+			</axis>
+		</joint>
+
+		<link name='base_leg_2'>
+			<pose frame=''>-0.5 0.8660254037844387 6 0 -0 2.0943951023931953</pose>
+			<visual name='base_leg_2_visual'>
+				<pose frame=''>0 0 0.5 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>1.0</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+				<material>
+					<ambient>0 0.5 0 1</ambient>
+					<diffuse>0 1.0 0 1</diffuse>
+					<specular>0.1 0.1 0.1 1</specular>
+					<emissive>0 0 0 0</emissive>
+				</material>
+			</visual>
+			<collision name='base_leg_2_collision'>
+				<pose frame=''>0 0 0.5 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>1.0</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+			<inertial>
+				<pose frame=''>0 0 0.5 0 -0 0</pose>
+				<mass>1</mass>
+				<inertia>
+					<ixx>0.1</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.1</iyy>
+					<iyz>0</iyz>
+					<izz>0.005</izz>
+				</inertia>
+			</inertial>
+			<visual name='base_leg_2_plate_revolute_visual'>
+				<pose frame=''>0 0 0 1.5707963267948966 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.2</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<visual name='base_leg_2_ball_visual'>
+				<pose frame=''>-0.1 0 1.1 0 -0 0</pose>
+				<geometry>
+					<sphere>
+						<radius>0.1</radius>
+					</sphere>
+				</geometry>
+			</visual>
+		</link>
+
+		<joint name='joint2' type='revolute'>
+			<child>base_leg_2</child>
+			<parent>base_plate</parent>
+			<axis>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>+3.1415926535897936</upper>
+				</limit>
+				<dynamics>
+					<damping>0</damping>
+					<friction>0</friction>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+				</dynamics>
+				<use_parent_model_frame>1</use_parent_model_frame>
+				<xyz>-0.8660254037844386 -0.5 0</xyz>
+			</axis>
+		</joint>
+
+		<link name='base_leg_3'>
+			<pose frame=''>-0.5 -0.8660254037844386 6 0 -0 4.1887902047863905</pose>
+			<visual name='base_leg_3_visual'>
+				<pose frame=''>0 0 0.5 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>1.0</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+				<material>
+					<ambient>0 0 0.5 1</ambient>
+					<diffuse>0 0 1.0 1</diffuse>
+					<specular>0.1 0.1 0.1 1</specular>
+					<emissive>0 0 0 0</emissive>
+				</material>
+			</visual>
+			<collision name='base_leg_3_collision'>
+				<pose frame=''>0 0 0.5 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>1.0</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+			<inertial>
+				<pose frame=''>0 0 0.5 0 -0 0</pose>
+				<mass>1</mass>
+				<inertia>
+					<ixx>0.1</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.1</iyy>
+					<iyz>0</iyz>
+					<izz>0.005</izz>
+				</inertia>
+			</inertial>
+			<visual name='base_leg_3_plate_revolute_visual'>
+				<pose frame=''>0 0 0 1.5707963267948966 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.2</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<visual name='base_leg_3_ball_visual'>
+				<pose frame=''>-0.1 0 1.1 0 -0 0</pose>
+				<geometry>
+					<sphere>
+						<radius>0.1</radius>
+					</sphere>
+				</geometry>
+			</visual>
+		</link>
+
+		<joint name='joint3' type='revolute'>
+			<child>base_leg_3</child>
+			<parent>base_plate</parent>
+			<axis>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>+3.1415926535897936</upper>
+				</limit>
+				<dynamics>
+					<damping>0</damping>
+					<friction>0</friction>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+				</dynamics>
+				<use_parent_model_frame>1</use_parent_model_frame>
+				<xyz>0.5 -0.2886751345948129 0</xyz>
+			</axis>
+		</joint>
+
+		<link name='distal_plate'>
+			<pose frame=''>0 0 8.35 0 -0 0</pose>
+			<visual name='distal_plate_visual'>
+				<pose frame=''>0 0 0 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.1</length>
+						<radius>0.9</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name='base_plate_collision'>
+				<pose frame=''>0 0 0 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.1</length>
+						<radius>0.9</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+
+		<link name='distal_leg_1'>
+			<pose frame=''>0.9 0 7.1 0 -0 0</pose>
+			<visual name='distal_leg_1_visual'>
+				<pose frame=''>0.1 0 0.6 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>1.0</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+				<material>
+					<ambient>0.5 0 0 1</ambient>
+					<diffuse>1.0 0 0 1</diffuse>
+					<specular>0.1 0.1 0.1 1</specular>
+					<emissive>0 0 0 0</emissive>
+				</material>
+			</visual>
+			<collision name='distal_leg_1_collision'>
+				<pose frame=''>0.1 0 0.6 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>1.0</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+			<inertial>
+				<pose frame=''>0 0 0.6 0 -0 0</pose>
+				<mass>1</mass>
+				<inertia>
+					<ixx>0.1</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.1</iyy>
+					<iyz>0</iyz>
+					<izz>0.005</izz>
+				</inertia>
+			</inertial>
+			<visual name='distal_leg_1_plate_revolute_visual'>
+				<pose frame=''>0.1 0 1.1 1.5707963267948966 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.2</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<visual name='distal_leg_1_ball_visual'>
+				<pose frame=''>0 0 0 0 -0 0</pose>
+				<geometry>
+					<sphere>
+						<radius>0.1</radius>
+					</sphere>
+				</geometry>
+			</visual>
+		</link>
+
+		<joint name='midjoint1' type='ball'>
+			<child>distal_leg_1</child>
+			<parent>base_leg_1</parent>
+			<axis>
+				<limit>
+					<lower>-1e+16</lower>
+					<upper>1e+16</upper>
+				</limit>
+				<dynamics>
+					<damping>0</damping>
+					<friction>0</friction>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+				</dynamics>
+				<use_parent_model_frame>1</use_parent_model_frame>
+				<xyz>1 0 0</xyz>
+			</axis>
+		</joint>
+
+		<link name='distal_leg_2'>
+			<pose frame=''>-0.45 0.7794228634059949 7.1 0 -0 2.0943951023931953</pose>
+			<visual name='distal_leg_2_visual'>
+				<pose frame=''>0.1 0 0.6 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>1.0</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+				<material>
+					<ambient>0 0.5 0 1</ambient>
+					<diffuse>0 1.0 0 1</diffuse>
+					<specular>0.1 0.1 0.1 1</specular>
+					<emissive>0 0 0 0</emissive>
+				</material>
+			</visual>
+			<collision name='distal_leg_2_collision'>
+				<pose frame=''>0.1 0 0.6 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>1.0</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+			<inertial>
+				<pose frame=''>0.1 0 0.6 0 -0 0</pose>
+				<mass>1</mass>
+				<inertia>
+					<ixx>0.1</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.1</iyy>
+					<iyz>0</iyz>
+					<izz>0.005</izz>
+				</inertia>
+			</inertial>
+			<visual name='distal_leg_2_plate_revolute_visual'>
+				<pose frame=''>0.1 0 1.1 1.5707963267948966 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.2</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<visual name='distal_leg_2_ball_visual'>
+				<pose frame=''>0 0 0 0 -0 0</pose>
+				<geometry>
+					<sphere>
+						<radius>0.1</radius>
+					</sphere>
+				</geometry>
+			</visual>
+		</link>
+
+		<joint name='midjoint2' type='ball'>
+			<child>distal_leg_2</child>
+			<parent>base_leg_2</parent>
+			<axis>
+				<limit>
+					<lower>-1e+16</lower>
+					<upper>1e+16</upper>
+				</limit>
+				<dynamics>
+					<damping>0</damping>
+					<friction>0</friction>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+				</dynamics>
+				<use_parent_model_frame>1</use_parent_model_frame>
+				<xyz>1 0 0</xyz>
+			</axis>
+		</joint>
+
+		<link name='distal_leg_3'>
+			<pose frame=''>-0.45 -0.7794228634059949 7.1 0 -0 4.1887902047863905</pose>
+			<visual name='distal_leg_3_visual'>
+				<pose frame=''>0.1 0 0.6 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>1.0</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+				<material>
+					<ambient>0 0 0.5 1</ambient>
+					<diffuse>0 0 1.0 1</diffuse>
+					<specular>0.1 0.1 0.1 1</specular>
+					<emissive>0 0 0 0</emissive>
+				</material>
+			</visual>
+			<collision name='distal_leg_3_collision'>
+				<pose frame=''>0.1 0 0.6 0 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>1.0</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+			<inertial>
+				<pose frame=''>0.1 0 0.6 0 -0 0</pose>
+				<mass>1</mass>
+				<inertia>
+					<ixx>0.1</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.1</iyy>
+					<iyz>0</iyz>
+					<izz>0.005</izz>
+				</inertia>
+			</inertial>
+			<visual name='distal_leg_3_plate_revolute_visual'>
+				<pose frame=''>0.1 0 1.1 1.5707963267948966 -0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.2</length>
+						<radius>0.1</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<visual name='distal_leg_3_ball_visual'>
+				<pose frame=''>0 0 0.0 0 -0 0</pose>
+				<geometry>
+					<sphere>
+						<radius>0.1</radius>
+					</sphere>
+				</geometry>
+			</visual>
+		</link>
+
+		<joint name='midjoint3' type='ball'>
+			<child>distal_leg_3</child>
+			<parent>base_leg_3</parent>
+			<axis>
+				<limit>
+					<lower>-1e+16</lower>
+					<upper>1e+16</upper>
+				</limit>
+				<dynamics>
+					<damping>0</damping>
+					<friction>0</friction>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+				</dynamics>
+				<use_parent_model_frame>1</use_parent_model_frame>
+				<xyz>1 0 0</xyz>
+			</axis>
+		</joint>
+
+		<joint name='distal_joint1' type='revolute'>
+			<pose frame=''>1 0 -0.15 0 -0 0</pose>
+			<child>distal_plate</child>
+			<parent>distal_leg_1</parent>
+			<axis>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>+3.1415926535897936</upper>
+				</limit>
+				<dynamics>
+					<damping>0</damping>
+					<friction>0</friction>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+				</dynamics>
+				<use_parent_model_frame>1</use_parent_model_frame>
+				<xyz>0 1 0</xyz>
+			</axis>
+		</joint>
+
+		<joint name='distal_joint2' type='revolute'>
+			<pose frame=''>-0.5 0.8660254037844387 -0.15 0 -0 0</pose>
+			<child>distal_plate</child>
+			<parent>distal_leg_2</parent>
+			<axis>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>+3.1415926535897936</upper>
+				</limit>
+				<dynamics>
+					<damping>0</damping>
+					<friction>0</friction>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+				</dynamics>
+				<use_parent_model_frame>1</use_parent_model_frame>
+				<xyz>-0.8660254037844388 -0.5 0</xyz>
+			</axis>
+		</joint>
+
+		<joint name='distal_joint3' type='revolute'>
+			<pose frame=''>-0.5 -0.8660254037844387 -0.15 0 -0 0</pose>
+			<child>distal_plate</child>
+			<parent>distal_leg_3</parent>
+			<axis>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>+3.1415926535897936</upper>
+				</limit>
+				<dynamics>
+					<damping>0</damping>
+					<friction>0</friction>
+					<spring_reference>0</spring_reference>
+					<spring_stiffness>0</spring_stiffness>
+				</dynamics>
+				<use_parent_model_frame>1</use_parent_model_frame>
+				<xyz>0.8660254037844384 -0.5 0</xyz>
+			</axis>
+		</joint>
+	</model>
+</sdf>
